@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'jacoco'
+    id 'com.github.kt3k.coveralls' version '2.12.2'
 }
 
 group = 'ru.mirea'
@@ -19,6 +20,13 @@ dependencies {
 test {
     useJUnitPlatform()
     finalizedBy jacocoTestReport
+}
+
+coveralls {
+    jacocoReportPath = "${layout.buildDirectory}/reports/jacoco/test/jacocoTestReport.xml"
+}
+tasks.coveralls {
+    dependsOn 'jacocoTestReport'
 }
 
 jacoco {

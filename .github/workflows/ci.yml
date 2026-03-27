@@ -35,11 +35,16 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x gradlew
 
-      - name: Run tests and build coverage report
+      - name: Run tests and generate JaCoCo XML
         run: ./gradlew build
 
-      - name: Upload JaCoCo HTML report
+      - name: Upload report artifact
         uses: actions/upload-artifact@v4
         with:
           name: jacoco-report
           path: build/reports/jacoco/test/html
+
+      - name: Publish coverage to Coveralls
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+        run: ./gradlew coveralls
