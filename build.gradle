@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'jacoco'
+    id 'org.sonarqube' version '7.2.3.7755'
 }
 
 group = 'ru.mirea'
@@ -23,6 +24,15 @@ test {
 
 jacoco {
     toolVersion = "0.8.14"
+}
+
+sonar {
+    properties {
+        property "sonar.projectKey", "shedeever_Prack4"
+        property "sonar.organization", "shedeever"
+        property "sonar.host.url", "https://sonarcloud.io"
+        property "sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacoco/test/jacocoTestReport.xml"
+    }
 }
 
 jacocoTestReport {
